@@ -5,8 +5,11 @@
 package com.mod2.view;
 
 import com.mod2.controller.Controller;
+import com.mod2.entities.Cliente;
 import com.mod2.entities.Productos;
 import com.mod2.entities.Filtro;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -56,8 +59,9 @@ private Controller controller;
         chk_marca = new javax.swing.JCheckBox();
         chk_modelo = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBtnAgregar = new javax.swing.JButton();
+        jBtnModificar = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,9 +143,29 @@ private Controller controller;
             }
         });
 
-        jButton2.setText("jButton2");
+        jBtnAgregar.setText("Agregar");
+        jBtnAgregar.setName("btnAgregar"); // NOI18N
+        jBtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAgregarMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jBtnModificar.setText("Modificar");
+        jBtnModificar.setName("btnModificar"); // NOI18N
+        jBtnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnModificarMouseClicked(evt);
+            }
+        });
+
+        jBtnEliminar.setText("Eliminar");
+        jBtnEliminar.setName("btnEliminar"); // NOI18N
+        jBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnEliminarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,20 +213,19 @@ private Controller controller;
                                         .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chk_descripcion)
+                                    .addComponent(chk_marca)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(chk_descripcion)
-                                        .addGap(194, 194, 194)
-                                        .addComponent(jButton2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(chk_marca)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(chk_modelo)
-                                                .addGap(31, 31, 31)
-                                                .addComponent(jButton1)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3)))))
-                        .addGap(174, 174, 174))))
+                                        .addComponent(chk_modelo)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jButton1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBtnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jBtnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                        .addComponent(jBtnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGap(138, 138, 138))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,20 +236,15 @@ private Controller controller;
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chk_descripcion)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jButton2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chk_descripcion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,9 +274,15 @@ private Controller controller;
                                 .addGap(90, 90, 90))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(111, 111, 111))))
+                        .addComponent(jBtnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnEliminar)
+                        .addGap(82, 82, 82))))
         );
+
+        jBtnAgregar.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -315,6 +339,40 @@ private Controller controller;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtdescripcionActionPerformed
 
+    private void jBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarMouseClicked
+        Productos pr = new Productos();
+        pr.setDescripcion(this.txtdescripcion.getText());
+        pr.setDetalles_tec(this.txtdescripcion_tec.getText());
+        pr.setIdproducto(this.txtidproducto.getText());
+        pr.setMarca(this.txtmarca.getText());
+        pr.setModelo(this.txtmodelo.getText());
+        pr.setPrecio(Double.parseDouble(this.txtprecio.getText()));
+        controller.agregar(pr);
+        controller = new Controller("Productos");
+        this.jtblProductos.setModel(controller);
+    }//GEN-LAST:event_jBtnAgregarMouseClicked
+
+    private void jBtnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModificarMouseClicked
+         Productos pr = new Productos();
+        pr.setDescripcion(this.txtdescripcion.getText());
+        pr.setDetalles_tec(this.txtdescripcion_tec.getText());
+        pr.setIdproducto(this.txtidproducto.getText());
+        pr.setMarca(this.txtmarca.getText());
+        pr.setModelo(this.txtmodelo.getText());
+        pr.setPrecio(Double.parseDouble(this.txtprecio.getText()));
+        controller.modificar(pr);
+        controller = new Controller("Productos");
+        this.jtblProductos.setModel(controller);
+    }//GEN-LAST:event_jBtnModificarMouseClicked
+
+    private void jBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarMouseClicked
+        Productos pr = new Productos();
+        pr.setIdproducto(this.txtidproducto.getText());
+        controller.elimina(pr);
+        controller = new Controller("Productos");
+        this.jtblProductos.setModel(controller);
+    }//GEN-LAST:event_jBtnEliminarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -353,9 +411,10 @@ private Controller controller;
     private javax.swing.JCheckBox chk_descripcion;
     private javax.swing.JCheckBox chk_marca;
     private javax.swing.JCheckBox chk_modelo;
+    private javax.swing.JButton jBtnAgregar;
+    private javax.swing.JButton jBtnEliminar;
+    private javax.swing.JButton jBtnModificar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

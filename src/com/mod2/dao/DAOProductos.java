@@ -72,12 +72,12 @@ public class DAOProductos implements IDao {
         try {
             st = this.cn.prepareStatement
 ("Update productos set descripcion=?,marca=?,modelo=?,precio=?,detalles_tec=? where idproducto=?");
-            st.setString(1, pr.getIdproducto() );
-            st.setString(2, pr.getDescripcion() );
-            st.setString(3, pr.getMarca());
-            st.setString(4, pr.getModelo());
-            st.setDouble(5, pr.getPrecio());
-            st.setString(6, pr.getDetalles_tec());
+            st.setString(1, pr.getDescripcion() );
+            st.setString(2, pr.getMarca());
+            st.setString(3, pr.getModelo());
+            st.setDouble(4, pr.getPrecio());
+            st.setString(5, pr.getDetalles_tec());
+            st.setString(6, pr.getIdproducto() );
             x = st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
